@@ -11,14 +11,20 @@
     "k6": "k6 run loadtest/script.js"
   },
   "dependencies": {
-    "body-parser": "^1.20.3",
-    "express": "^4.19.2"
+    "body-parser": "^2.4.0",
+    "express": "^5.3.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.1",
-    "eslint": "^9.9.0",
-    "jest": "^29.7.0",
-    "nodemon": "^3.1.0",
-    "supertest": "^7.0.0"
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.14.0",
+    "globals": "^17.14.0",
+    "jest": "^30.5.2",
+    "nodemon": "^3.1.14",
+    "supertest": "^7.3.1"
+  },
+  "overrides": {
+    "minimatch": "^11.0.4",
+    "glob": "^14.0.3",
+    "deepmerge": "4.1.2"
   }
 }

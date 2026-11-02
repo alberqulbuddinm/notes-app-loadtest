@@ -1,24 +1,30 @@
-const { FlatCompat } = require('@eslint/eslintrc');
 const js = require('@eslint/js');
-
-// Initialize with the necessary configurations
-const compat = new FlatCompat({
-  recommendedConfig: js.configs.recommended,
-  eslintrc: true
-});
+const globals = require('globals');
 
 module.exports = [
   js.configs.recommended,
-  ...compat.config({
-    env: { 
-      es2021: true, 
-      node: true, 
-      jest: true 
+  {
+    ignores: ['node_modules/**', 'coverage/**'],
+  },
+  {
+    files: ['**/*.js'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'commonjs',
+      globals: { ...globals.node, ...globals.jest },
     },
     rules: {
-      "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
-      "no-console": "off",
-      "eqeqeq": ["error", "always"]
-    }
-  })
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      'no-console': 'off',
+      eqeqeq: ['error', 'always'],
+    },
+  },
+  {
+    // Script k6 memakai ES module dan variabel global __ENV dari k6
+    files: ['loadtest/**/*.js'],
+    languageOptions: {
+      sourceType: 'module',
+      globals: { __ENV: 'readonly' },
+    },
+  },
 ];
